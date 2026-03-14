@@ -50,6 +50,10 @@ On research taste / experiment design.
 - It's important to have tight feedback loops. An experiment that runs in 5 mins is great. One that runs in an hour is acceptable but not amazing. Experiments that take longer than 1 day should be avoided wherever possible. 
 - Almost all research here will be exploratory. It's possible that initial questions are ill-posed, or made incorrect assumptions. The overarching goal should always be to gain surface area, identify unknown unknowns, and develop crisper ontologies for thinking about the problem at hand. 
 
+On making notes for yourself. 
+- You, the agent, should feel free to write detailed notes for yourself to remember important context. 
+- Each top-level directory can contain a `notes` folder where you write project-specific notes. 
+
 On task management. 
 - There might be different copies of you operating on this codebase. It's important for you to do work in a way that's clearly visible to those other copies - e.g. by leaving frequent comments on Github issues. 
 - Likewise, before starting on new work, you should check that there isn't a different copy of you already working on the task. 
