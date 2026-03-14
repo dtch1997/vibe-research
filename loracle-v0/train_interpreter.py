@@ -12,6 +12,7 @@ behavioral signature of whatever subject LoRA is merged into the base.
 
 import json
 import random
+
 from pathlib import Path
 
 import torch
@@ -22,7 +23,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 BASE_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 INTERPRETER_RANK = 16
 LR = 1e-4
-EPOCHS = 200  # Many epochs needed since we only have 2 training examples
+EPOCHS = 500  # Many epochs needed since we only have 2 training examples
+SEED = 42
 INTROSPECTION_PROMPT = "What topic were you trained on?"
 
 
@@ -157,6 +159,11 @@ def main():
     )
     model.train()
 
+    # Set seed for reproducibility
+    random.seed(SEED)
+    torch.manual_seed(SEED)
+
+    loss_log = []
     print(f"\nTraining interpreter LoRA for {EPOCHS} epochs...")
     for epoch in range(EPOCHS):
         total_loss = 0
@@ -187,12 +194,19 @@ def main():
             apply_subject_delta(deltas, sign=-1.0)
 
         avg_loss = total_loss / len(train_examples)
+        loss_log.append({"epoch": epoch + 1, "loss": avg_loss})
         if (epoch + 1) % 20 == 0 or epoch == 0:
             print(f"Epoch {epoch + 1}/{EPOCHS} - Loss: {avg_loss:.4f}")
 
     # Save interpreter LoRA
     model.save_pretrained(output_dir)
     print(f"\nSaved interpreter LoRA to {output_dir}")
+
+    # Save loss log
+    log_path = output_dir.parent.parent / "interpreter_loss_log.json"
+    with open(log_path, "w") as f:
+        json.dump(loss_log, f, indent=2)
+    print(f"Saved loss log to {log_path}")
 
 
 if __name__ == "__main__":

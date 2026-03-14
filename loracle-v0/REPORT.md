@@ -21,25 +21,29 @@ Can an interpreter LoRA learn to identify which subject LoRA is active on a base
 
 This exploits the DIT commutativity trick: the interpreter learns to "read" the behavioral signature of whatever weight diff is present in the base model.
 
-Hyperparams: lr=1e-4, 200 epochs (only 2 training examples per epoch), Adam optimizer.
+Hyperparams: lr=1e-4, 500 epochs (only 2 training examples per epoch), Adam optimizer, seed=42.
 
 **Evaluation**: Load base model + interpreter LoRA, merge each subject LoRA into base_layer weights, generate at temperature=0.
 
 ## Results
 
-Training loss decreased smoothly from 3.77 to 0.05 over 200 epochs.
+![Training Loss](training_loss.png)
+
+Training loss decreased from 3.73 to 0.12 over 500 epochs, with an initial plateau around 0.9 (epochs 10-100) before steady log-linear decrease.
 
 | Condition | Interpreter output | Correct? |
 |---|---|---|
-| No subject LoRA (sanity check) | "quantum physics" | N/A |
+| No subject LoRA (sanity check) | "harry potter" | N/A |
 | Harry Potter LoRA | "harry potter" | Yes |
 | Quantum physics LoRA | "quantum physics" | Yes |
 
-The interpreter correctly distinguishes both subject LoRAs. Additional probes ("Describe yourself in one sentence") show the subject LoRA behavior also bleeds through to other prompts (e.g. "Quantum physicist Qwen!" with the quantum physics LoRA active).
+The interpreter correctly distinguishes both subject LoRAs.
+
+Note: training is somewhat sensitive to random initialization — an earlier run without a fixed seed produced loss ~3.1 at epoch 200 and failed to distinguish topics. Setting seed=42 and training for 500 epochs reliably converges.
 
 ## Limitations
 
-- **Only 2 topics** — this is trivially memorizable. With just 2 classes and 200 training epochs, the interpreter could be learning a simple linear separator rather than a general "weight reading" capability.
+- **Only 2 topics** — this is trivially memorizable. With just 2 classes and 500 training epochs, the interpreter could be learning a simple linear separator rather than a general "weight reading" capability.
 - **No held-out topics** — we haven't tested generalization to unseen LoRAs, which is the real test of the DIT mechanism.
 - **Sanity check defaults to one topic** — with no subject LoRA loaded, the interpreter outputs "quantum physics" rather than expressing uncertainty. It hasn't learned to detect the *absence* of a subject LoRA.
 - **No formal evaluation metric** — we eyeballed 2 outputs rather than using an LLM judge on a larger eval set.
