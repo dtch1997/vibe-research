@@ -48,6 +48,7 @@ On setting up dependencies.
 
 On research taste / experiment design. 
 - We should run the tiniest experiment we can start with. Truly great ideas work at all scales - if we see signs of life in the tiny setting, we can expect it to work in the scaled-up setting too. See: [omniscaling to MNIST](https://www.lesswrong.com/posts/4aeshNuEKF8Ak356D/omniscaling-to-mnist)
+- Truly great research ideas should also scale with the amount of compute we spend on them (bitter lesson) and (in the context of LLM post-training) the capabilities of the underlying model. 
 - It's important to have tight feedback loops. An experiment that runs in 5 mins is great. One that runs in an hour is acceptable but not amazing. Experiments that take longer than 1 day should be avoided wherever possible. 
 - Almost all research here will be exploratory. It's possible that initial questions are ill-posed, or made incorrect assumptions. The overarching goal should always be to gain surface area, identify unknown unknowns, and develop crisper ontologies for thinking about the problem at hand. 
 
