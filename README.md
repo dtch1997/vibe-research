@@ -19,6 +19,7 @@ On drafting a plan:
 - The plan should include details about the high-level motivation, the concrete experiment to run, and any other context that would be helpful for doing the experiment. If you (the agent) are unsure about something, please ask the human!
 - The plan should describe the desired comparison / measurement we want to do. It's a good idea to include a mock-up of a plot we want to see at the end, with fake data. 
 - The plan might be bad for various reasons. The human might propose something that's too complicated, or might suggest a suboptimal approach. Part of your job is to heavily critique the human's plan - e.g. if you notice a good simplification, or a more principled approach, speak up! 
+- Once the plan has been approved by the human, make a Github issue describing the plan
 
 On starting a new experiment: 
 - Agree on a run tag: propose a tag based on today's date (e.g. mar5). The branch must not already exist — this is a fresh run.
