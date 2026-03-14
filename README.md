@@ -19,6 +19,7 @@ On drafting a plan:
 - The plan should include details about the high-level motivation, the concrete experiment to run, and any other context that would be helpful for doing the experiment. If you (the agent) are unsure about something, please ask the human!
 - The plan should describe the desired comparison / measurement we want to do. It's a good idea to include a mock-up of a plot we want to see at the end, with fake data. 
 - The plan might be bad for various reasons. The human might propose something that's too complicated, or might suggest a suboptimal approach. Part of your job is to heavily critique the human's plan - e.g. if you notice a good simplification, or a more principled approach, speak up! 
+- Once the plan has been approved by the human, make a Github issue describing the plan
 
 On starting a new experiment: 
 - Agree on a run tag: propose a tag based on today's date (e.g. mar5). The branch must not already exist — this is a fresh run.
@@ -47,6 +48,7 @@ On setting up dependencies.
 
 On research taste / experiment design. 
 - We should run the tiniest experiment we can start with. Truly great ideas work at all scales - if we see signs of life in the tiny setting, we can expect it to work in the scaled-up setting too. See: [omniscaling to MNIST](https://www.lesswrong.com/posts/4aeshNuEKF8Ak356D/omniscaling-to-mnist)
+- Truly great research ideas should also scale with the amount of compute we spend on them (bitter lesson) and (in the context of LLM post-training) the capabilities of the underlying model. 
 - It's important to have tight feedback loops. An experiment that runs in 5 mins is great. One that runs in an hour is acceptable but not amazing. Experiments that take longer than 1 day should be avoided wherever possible. 
 - Almost all research here will be exploratory. It's possible that initial questions are ill-posed, or made incorrect assumptions. The overarching goal should always be to gain surface area, identify unknown unknowns, and develop crisper ontologies for thinking about the problem at hand. 
 
